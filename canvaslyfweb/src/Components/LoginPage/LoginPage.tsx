@@ -8,12 +8,18 @@ const LoginPage = (props: Props) => {
 
   const handleLogin = () => {
     // Handle login logic here
+    props.onLogin(email, password);
   };
 
   return (
-    <Container size="lg" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-      <Image src="/path/to/loginpageimage.jpg" alt="Login Page Image" style={{ flex: 1, maxWidth: '50%' }} />
-      <Paper style={{ padding: 20, flex: 1, maxWidth: '50%' }}>
+    <Group style={{ display: 'flex', height: '100vh', width: '100vw' }}>
+      {/* <Image src="url(/assets/images/loginpageimage.png)" alt="Login Page Image" style={{ flex: 1, maxWidth: '50%' }} /> */}
+      <Group style={{
+        backgroundImage: 'url(/assets/images/loginpageimage.png)',
+        backgroundSize: 'cover', flex: 1, height: '100%', width: '100%'
+      }} />
+
+      <Paper style={{ padding: 50, minWidth: 500 }}>
         <Title order={2} mb="lg">Login</Title>
         <TextInput
           label="Email"
@@ -34,7 +40,7 @@ const LoginPage = (props: Props) => {
           <Button onClick={handleLogin}>Login</Button>
         </Group>
       </Paper>
-    </Container>
+    </Group>
   );
 };
 
