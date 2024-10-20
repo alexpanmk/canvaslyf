@@ -29,7 +29,7 @@ const NavItems = [
   { icon: ReportMoney, label: 'Earnings' }
 ]
 
-export function NavBar() {
+export function NavBar(props: any) {
   const [active, setActive] = useState(0);
 
   const links = NavItems.map((item, index) => (
@@ -37,7 +37,10 @@ export function NavBar() {
       {...item}
       key={item.label}
       active={index === active}
-      onClick={() => setActive(index)}
+      onClick={() => {
+        props.onChange(item.label)
+        setActive(index)
+      }}
     />
   ));
 
