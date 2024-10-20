@@ -12,14 +12,14 @@ const LoginPage = (props: Props) => {
   };
 
   return (
-    <Group style={{ display: 'flex', height: '100vh', width: '100vw' }}>
+    <Group style={{ gap: 0, display: 'flex', height: '100vh', width: '100vw' }}>
       {/* <Image src="url(/assets/images/loginpageimage.png)" alt="Login Page Image" style={{ flex: 1, maxWidth: '50%' }} /> */}
       <Group style={{
         backgroundImage: 'url(/assets/images/loginpageimage.png)',
         backgroundSize: 'cover', flex: 1, height: '100%', width: '100%'
       }} />
 
-      <Paper style={{ padding: 50, minWidth: 500 }}>
+      <Paper style={{ alignContent: 'center', justifyContent: 'center', padding: 50, minWidth: 500, height: '100%' }}>
         <Title order={2} mb="lg">Login</Title>
         <TextInput
           label="Email"
