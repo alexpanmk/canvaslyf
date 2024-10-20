@@ -16,7 +16,7 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
   return (
     <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
       <UnstyledButton onClick={onClick} className={classes.link} data-active={active || undefined}>
-        <Icon color={'#FFF'} size={48} strokeWidth={1} />
+        <Icon color={'#FFF'} size={32} strokeWidth={1} />
       </UnstyledButton>
     </Tooltip>
   );
