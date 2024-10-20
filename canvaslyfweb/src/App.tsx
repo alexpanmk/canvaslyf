@@ -1,13 +1,18 @@
 import { useState, useEffect, useRef } from 'react'
-import { AppShell, Group, Stack, Text, TextInput } from '@mantine/core'
+import { Title, AppShell, Group, Stack, Text, TextInput } from '@mantine/core'
 // import { Unity, useUnityContext } from "react-unity-webgl";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+// import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
 import SignUpFlow from './Components/SignUpFlow/SignUpFlow';
 import { getFirestore } from "firebase/firestore";
+
+import { NavBar } from './Components/NavBar/NavBar';
+import ArtworkList from './Components/ArtworkList/ArtworkList';
+import LoginPage from './Components/LoginPage/LoginPage';
+import Home from './Components/Home/Home';
 
 //Firebase Config
 const firebaseConfig = {
@@ -24,6 +29,15 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 function App() {
+
+  interface User {
+    email: string;
+    password: string;
+  }
+
+  const [user, setUser] = useState<User | null>(null);
+  const [currentView, setCurrentView] = useState('Home');
+
   // const inputRef = useRef(null);
   // const unityRef = useRef(null);
 
@@ -40,10 +54,48 @@ function App() {
   return (
     <>
 
-      <AppShell>
+      <AppShell style={{
+        backgroundImage: 'url(/assets/images/galleryplaceholder.png)',
+        backgroundSize: 'cover',
+      }}    >
 
-        <AppShell.Main style={{ height: '100vh', position: 'relative', overflow: 'hidden' }}>
-          <SignedOut>
+
+        <AppShell.Main style={{
+          // backgroundImage: 'url(/assets/images/galleryplaceholder.png)',
+          // backgroundSize: 'cover',
+          height: '100vh', position: 'relative', overflow: 'hidden'
+        }}>
+
+
+          {user &&
+            <Group>
+              {/* Left Nav */}
+              <Stack style={{ padding: 20, height: '100vh', width: 80 }}>
+                <NavBar onChange={(page) => setCurrentView(page)} />
+                {/* <Stack style={{ padding: 20, height: '100vh', width: 100, backgroundColor: 'rgba(0, 0, 0, 0.7)', borderRadius: 40 }}>
+
+              </Stack> */}
+              </Stack>
+
+              {/* Main Content */}
+              <Group style={{ height: '100vh', flex: 1, padding: 20 }}>
+                {currentView === 'Home' && <Home />}
+                {currentView === 'My Artworks' && <ArtworkList />}
+              </Group>
+            </Group>}
+
+
+
+
+
+          {!user && <LoginPage
+            onLogin={(email, password) => {
+              setUser({ email, password })
+              console.log(user)
+            }}
+          />}
+
+          {/* <SignedOut>
             <SignInButton />
           </SignedOut>
 
@@ -55,7 +107,7 @@ function App() {
             }}>
               <SignUpFlow signUpType={'artist'} />
             </Group>
-          </SignedIn>
+          </SignedIn> */}
         </AppShell.Main>
       </AppShell>
 
