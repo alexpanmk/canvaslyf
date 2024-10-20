@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Title, AppShell, Group, Stack, Text, TextInput } from '@mantine/core'
-// import { Unity, useUnityContext } from "react-unity-webgl";
+import { Unity, useUnityContext } from "react-unity-webgl";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
@@ -43,20 +43,56 @@ function App() {
 
   // const [value, setValue] = useState('');
 
-  // const { unityProvider } = useUnityContext({
-  //   loaderUrl: "/assets/canvasunity/Build/canvasunity.loader.js",
-  //   dataUrl: "/assets/canvasunity/Build/canvasunity.data.unityweb",
-  //   frameworkUrl: "/assets/canvasunity/Build/canvasunity.framework.js.unityweb",
-  //   codeUrl: "/assets/canvasunity/Build/canvasunity.wasm.unityweb",
-  // });
+  const { unityProvider } = useUnityContext({
+    loaderUrl: "/assets/canvasunity/Build/canvasunity.loader.js",
+    dataUrl: "/assets/canvasunity/Build/canvasunity.data.unityweb",
+    frameworkUrl: "/assets/canvasunity/Build/canvasunity.framework.js.unityweb",
+    codeUrl: "/assets/canvasunity/Build/canvasunity.wasm.unityweb",
+  });
 
 
   return (
     <>
+      <div style={{
+        // backgroundImage: 'url(/assets/images/galleryplaceholder.png)',
+        // backgroundSize: 'cover',
+        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1
+      }}>
+
+        {user &&
+          <Group>
+            {/* Left Nav */}
+            <Stack style={{ padding: 20, height: '100vh', width: 80 }}>
+              <NavBar onChange={(page) => setCurrentView(page)} />
+              {/* <Stack style={{ padding: 20, height: '100vh', width: 100, backgroundColor: 'rgba(0, 0, 0, 0.7)', borderRadius: 40 }}>
+
+              </Stack> */}
+            </Stack>
+
+            {/* Main Content */}
+            <Group style={{ height: '100vh', flex: 1, padding: 20 }}>
+              {currentView === 'Home' &&
+                <>
+                  <Home />
+                </>
+              }
+              {currentView === 'My Artworks' && <ArtworkList />}
+
+            </Group>
+
+          </Group>}
+
+        {!user && <LoginPage
+          onLogin={(email, password) => {
+            setUser({ email, password })
+            console.log(user)
+          }}
+        />}
+      </div>
 
       <AppShell style={{
-        backgroundImage: 'url(/assets/images/galleryplaceholder.png)',
-        backgroundSize: 'cover',
+        // backgroundImage: 'url(/assets/images/galleryplaceholder.png)',
+        // backgroundSize: 'cover',
       }}    >
 
 
@@ -66,34 +102,14 @@ function App() {
           height: '100vh', position: 'relative', overflow: 'hidden'
         }}>
 
-
-          {user &&
-            <Group>
-              {/* Left Nav */}
-              <Stack style={{ padding: 20, height: '100vh', width: 80 }}>
-                <NavBar onChange={(page) => setCurrentView(page)} />
-                {/* <Stack style={{ padding: 20, height: '100vh', width: 100, backgroundColor: 'rgba(0, 0, 0, 0.7)', borderRadius: 40 }}>
-
-              </Stack> */}
-              </Stack>
-
-              {/* Main Content */}
-              <Group style={{ height: '100vh', flex: 1, padding: 20 }}>
-                {currentView === 'Home' && <Home />}
-                {currentView === 'My Artworks' && <ArtworkList />}
-              </Group>
-            </Group>}
+          <Unity unityProvider={unityProvider} style={{ width: '100%', height: '100%' }} />
 
 
 
 
 
-          {!user && <LoginPage
-            onLogin={(email, password) => {
-              setUser({ email, password })
-              console.log(user)
-            }}
-          />}
+
+
 
           {/* <SignedOut>
             <SignInButton />
