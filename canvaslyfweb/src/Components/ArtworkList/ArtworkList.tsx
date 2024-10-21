@@ -72,6 +72,9 @@ const ArtworkList = (props: any) => {
       )}
 
       <Modal
+        size={'50%'}
+        centered
+
         opened={modalOpened}
         onClose={() => setModalOpened(false)}
         title="Add New Artwork"
