@@ -4,6 +4,7 @@ import { MantineProvider } from '@mantine/core';
 
 import App from './App.tsx'
 import '@mantine/core/styles.css';
+import '@mantine/dropzone/styles.css';
 
 import { ClerkProvider } from '@clerk/clerk-react'
 
