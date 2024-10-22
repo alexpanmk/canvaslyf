@@ -35,19 +35,19 @@ const LisaPersona = {
 const Lisa = (props: any) => {
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: 'http://localhost:3000/api/chat/',
+    api: 'http://localhost:3000/api/chat',
     body: {
       persona: LisaPersona,
     },
   });
 
-  const [inputValue, setInputValue] = useState('');
+  // const [inputValue, setInputValue] = useState('');
 
-  const handleSendMessage = () => {
-    if (input.trim()) {
-      handleSubmit();
-    }
-  };
+  // const handleSendMessage = () => {
+  //   if (input.trim()) {
+  //     handleSubmit();
+  //   }
+  // };
 
   return (
     <Stack style={{ height: '100%' }}>
@@ -57,8 +57,7 @@ const Lisa = (props: any) => {
           {messages.map((message, index) => (
             <Group key={index} align={message.role === 'assistant' ? 'flex-end' : 'flex-start'} style={{ marginBottom: '10px' }}>
               <Text style={{ backgroundColor: message.role === 'user' ? '#blue' : '#gray', padding: '10px', borderRadius: '10px', color: '#FFF' }}>
-                {message.role}
-                {message.content}
+                {`${message.role === 'user' ? 'You' : 'Lisa'}: ${message.content}`}
               </Text>
             </Group>
           ))}
@@ -70,7 +69,7 @@ const Lisa = (props: any) => {
           value={input}
           onChange={handleInputChange}
         />
-        <ActionIcon color="blue" variant="filled" onClick={handleSendMessage}>
+        <ActionIcon color="blue" variant="filled" onClick={handleSubmit}>
           <Send size={16} />
         </ActionIcon>
       </Group>
