@@ -4,21 +4,44 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 5.0f;
-
     // Start is called before the first frame update
+    [SerializeField] Transform cameraTransform;
+    [SerializeField] float mouseSensitivity = 3f;
+    [SerializeField] float movementSpeed = 3f;
+
+
+    Vector2 look;
+
     void Start()
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        UpdateLook();
+        UpdateMovement();
+    }
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        transform.Translate(movement * speed * Time.deltaTime, Space.World);
+    void UpdateMovement()
+    {
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        move = transform.TransformDirection(move);
+        move.y = 0;
+
+        transform.position += move * Time.deltaTime * movementSpeed;
+    }
+
+
+    // Update is called once per frame
+    void UpdateLook()
+    {
+        look.x += Input.GetAxis("Mouse X") * mouseSensitivity;
+        look.y += Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+        look.y = Mathf.Clamp(look.y, -90, 90);
+
+        cameraTransform.localRotation = Quaternion.Euler(-look.y, 0, 0);
+        transform.localRotation = Quaternion.Euler(0, look.x, 0);
     }
 }
