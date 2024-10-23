@@ -68,6 +68,11 @@ const Lisa = (props: any) => {
           style={{ flex: 1 }}
           value={input}
           onChange={handleInputChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSubmit();
+            }
+          }}
         />
         <ActionIcon color="blue" variant="filled" onClick={handleSubmit}>
           <Send size={16} />
