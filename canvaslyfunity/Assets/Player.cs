@@ -11,15 +11,32 @@ public class Player : MonoBehaviour
 
 
     Vector2 look;
+    bool isMouseInputEnabled = true;
+
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;  // Hide the cursor
     }
 
     void Update()
     {
-        UpdateLook();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnlockCursor();
+        }
+        // Check for mouse click to re-enable mouse input
+        if (!isMouseInputEnabled && Input.GetMouseButtonDown(0)) // Left mouse click
+        {
+            LockCursor(); // Lock the cursor again and re-enable mouse input
+        }
+
+        if (isMouseInputEnabled)
+        {
+            UpdateLook();
+        }
+
         UpdateMovement();
     }
 
@@ -32,7 +49,19 @@ public class Player : MonoBehaviour
         transform.position += move * Time.deltaTime * movementSpeed;
     }
 
+    void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
+        Cursor.visible = false; // Hide the cursor
+        isMouseInputEnabled = true; // Enable mouse input
+    }
 
+    void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+        Cursor.visible = true; // Show the cursor
+        isMouseInputEnabled = false; // Disable mouse input
+    }
     // Update is called once per frame
     void UpdateLook()
     {
