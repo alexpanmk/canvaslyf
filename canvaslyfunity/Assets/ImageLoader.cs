@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using System.Collections;
 
 public class ImageLoader : MonoBehaviour
@@ -42,18 +43,19 @@ public class ImageLoader : MonoBehaviour
 
     private IEnumerator LoadImageFromUrl(RawImage rawImage, string imageUrl)
     {
-        // Use UnityWebRequest for more flexibility over WWW
-        using (WWW www = new WWW(imageUrl))
+        using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(imageUrl))
         {
-            yield return www;
-            if (www.error == null)
+            yield return uwr.SendWebRequest();
+
+            if (uwr.result == UnityWebRequest.Result.ConnectionError || uwr.result == UnityWebRequest.Result.ProtocolError)
             {
-                rawImage.texture = www.texture;
-                Debug.Log("Image successfully loaded: " + imageUrl);
+                Debug.LogError("Error loading image: " + uwr.error);
             }
             else
             {
-                Debug.LogError("Error loading image: " + www.error);
+                Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
+                rawImage.texture = texture;
+                Debug.Log("Image successfully loaded: " + imageUrl);
             }
         }
     }
