@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "canvaslyf"
-  }
+    "default": "canvaslyf",
+    "staging": "canvaslyf"
+  },
+  "targets": {},
+  "etags": {}
 }
