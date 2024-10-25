@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Title, AppShell, Group, Stack, Text, TextInput } from '@mantine/core'
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { initializeApp } from "firebase/app";
@@ -13,6 +13,8 @@ import { NavBar } from './Components/NavBar/NavBar';
 import ArtworkList from './Components/ArtworkList/ArtworkList';
 import LoginPage from './Components/LoginPage/LoginPage';
 import Home from './Components/Home/Home';
+
+import { getAllArtworks } from './service/artwork';
 
 //Firebase Config
 const firebaseConfig = {
@@ -31,11 +33,13 @@ const db = getFirestore(app);
 function App() {
 
   interface User {
+
     email: string;
     password: string;
   }
 
   const [user, setUser] = useState<User | null>(null);
+  const [artworks, setArtworks] = useState<any[]>([]);
   const [currentView, setCurrentView] = useState('Home');
 
   // const inputRef = useRef(null);
@@ -43,13 +47,51 @@ function App() {
 
   // const [value, setValue] = useState('');
 
-  const { unityProvider } = useUnityContext({
+  const { unityProvider, requestPointerLock, addEventListener, removeEventListener } = useUnityContext({
     loaderUrl: "/assets/canvasunity/Build/canvasunity.loader.js",
-    dataUrl: "/assets/canvasunity/Build/canvasunity.data.unityweb",
-    frameworkUrl: "/assets/canvasunity/Build/canvasunity.framework.js.unityweb",
-    codeUrl: "/assets/canvasunity/Build/canvasunity.wasm.unityweb",
+    dataUrl: "/assets/canvasunity/Build/canvasunity.data",
+    frameworkUrl: "/assets/canvasunity/Build/canvasunity.framework.js",
+    codeUrl: "/assets/canvasunity/Build/canvasunity.wasm",
   });
 
+  const handleCoord = useCallback((value: any) => {
+    console.log(value)
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Tab') {
+        requestPointerLock();
+      }
+    };
+
+    window.addEventListener('click', requestPointerLock);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [requestPointerLock]);
+
+  useEffect(() => {
+    addEventListener("Coord", handleCoord);
+    return () => {
+      removeEventListener("Coord", handleCoord);
+    };
+  }, [addEventListener, removeEventListener, handleCoord]);
+
+  useEffect(() => {
+    const unSubscribe = getAllArtworks((artworks: any[]) => {
+      setArtworks(artworks)
+    })
+
+    return () => {
+      unSubscribe
+    }
+
+  }, [])
+
+
+  console.log(artworks)
 
   return (
     <>
@@ -73,10 +115,12 @@ function App() {
             <Group style={{ height: '100vh', flex: 1, padding: 20 }}>
               {currentView === 'Home' &&
                 <>
-                  <Home />
+                  <Home
+                    artworks={artworks}
+                  />
                 </>
               }
-              {currentView === 'My Artworks' && <ArtworkList />}
+              {currentView === 'My Artworks' && <ArtworkList tabIndex={2} />}
 
             </Group>
 
@@ -96,13 +140,15 @@ function App() {
       }}    >
 
 
-        <AppShell.Main style={{
-          // backgroundImage: 'url(/assets/images/galleryplaceholder.png)',
-          // backgroundSize: 'cover',
-          height: '100vh', position: 'relative', overflow: 'hidden'
-        }}>
+        <AppShell.Main
 
-          <Unity unityProvider={unityProvider} style={{ width: '100%', height: '100%' }} />
+          style={{
+            // backgroundImage: 'url(/assets/images/galleryplaceholder.png)',
+            // backgroundSize: 'cover',
+            height: '100vh', position: 'relative', overflow: 'hidden'
+          }}>
+
+          <Unity unityProvider={unityProvider} style={{ width: '100%', height: '100%' }} tabIndex={1} />
 
 
 
