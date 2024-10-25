@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.InteropServices;
 
 public class Player : MonoBehaviour
 {
@@ -81,15 +82,14 @@ public class Player : MonoBehaviour
     {
         look.x += Input.GetAxis("Mouse X") * mouseSensitivity;
         look.y += Input.GetAxis("Mouse Y") * mouseSensitivity;
-
         look.y = Mathf.Clamp(look.y, -90, 90);
-
         cameraTransform.localRotation = Quaternion.Euler(-look.y, 0, 0);
         transform.localRotation = Quaternion.Euler(0, look.x, 0);
     }
 
     void LockCursor()
     {
+
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
         Cursor.visible = false; // Hide the cursor
         isMouseInputEnabled = true; // Enable mouse input
@@ -98,6 +98,7 @@ public class Player : MonoBehaviour
 
     void UnlockCursor()
     {
+
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Show the cursor
         isMouseInputEnabled = false; // Disable mouse input

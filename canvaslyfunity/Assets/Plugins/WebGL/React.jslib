@@ -1,5 +1,5 @@
 mergeInto(LibraryManager.library, {
-  GameOver: function (userName, score) {
-    window.dispatchReactUnityEvent("GameOver", UTF8ToString(userName), score);
+  nearCanvas: function (canvas) {
+    window.dispatchReactUnityEvent("nearCanvas", canvas);
   },
 });
