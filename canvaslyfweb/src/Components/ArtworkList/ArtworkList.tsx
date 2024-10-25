@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { SimpleGrid, Group, Stack, Modal, Text, Title, Card, Image, Button } from '@mantine/core';
+import { SimpleGrid, Badge, Group, Stack, Modal, Text, Title, Card, Image, Button } from '@mantine/core';
 
 import AddArtwork from './AddArtwork';
 import ArtworkItemView from './ArtworkItemView';
+
+import { isNull } from '../../functions/functions';
 
 const sampleArtworks = [
   {
@@ -31,6 +33,9 @@ const ArtworkList = (props: any) => {
   const [currentView, setCurrentView] = useState('list');
   const [selectedArtwork, setSelectedArtwork] = useState(null);
 
+  const artworks = isNull(props.artworks) ? sampleArtworks : props.artworks;
+
+
   const handleViewDetails = (artwork: any) => {
     setSelectedArtwork(artwork);
     setCurrentView('detail');
@@ -47,26 +52,32 @@ const ArtworkList = (props: any) => {
         <Title order={1}>{`My Artworks`}</Title>
         <Button color="blue" onClick={() => setModalOpened(true)}>Add Artwork</Button>
       </Group>
-
-      {currentView === 'list' && (
-        <SimpleGrid cols={3} spacing="lg">
-          {sampleArtworks.map((artwork) => (
-            <Card key={artwork.id} shadow="sm" padding="lg">
-              <Card.Section>
-                <Image src={artwork.imageUrl} alt={artwork.title} />
-              </Card.Section>
-              <Group position="apart" style={{ marginBottom: 5, marginTop: 10 }}>
-                <Title order={4}>{artwork.title}</Title>
-              </Group>
-              <Text size="sm">{artwork.description}</Text>
-              <Button variant="light" color="blue" fullWidth style={{ marginTop: 14 }} onClick={() => handleViewDetails(artwork)}>
-                View Details
-              </Button>
-            </Card>
-          ))}
-        </SimpleGrid>
-      )}
-
+      <Stack style={{ overflow: 'auto' }}>
+        {currentView === 'list' && (
+          <SimpleGrid cols={3} spacing="lg">
+            {artworks.map((artwork: any) => (
+              <Card key={artwork.id} shadow="sm" padding="lg">
+                <Card.Section>
+                  <Image src={artwork.file} alt={artwork.file} />
+                </Card.Section>
+                <Group style={{ marginBottom: 5, marginTop: 10 }}>
+                  <Title order={4}>{artwork.title}</Title>
+                </Group>
+                <Group style={{ marginBottom: 5 }}>
+                  <Title order={5}>{`$${artwork.price}`}</Title>
+                  {artwork.status === 'Sold' && <Badge color="red">Sold</Badge>}
+                </Group>
+                <Stack style={{ flex: 1 }}>
+                  <Text size="sm">{artwork.description}</Text>
+                </Stack>
+                <Button variant="light" color="blue" fullWidth style={{ marginTop: 14 }} onClick={() => handleViewDetails(artwork)}>
+                  View Details
+                </Button>
+              </Card>
+            ))}
+          </SimpleGrid>
+        )}
+      </Stack>
       {currentView === 'detail' && selectedArtwork && (
         <ArtworkItemView artwork={selectedArtwork} onBack={handleBackToList} />
       )}

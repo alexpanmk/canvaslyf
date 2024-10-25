@@ -120,7 +120,11 @@ function App() {
                   />
                 </>
               }
-              {currentView === 'My Artworks' && <ArtworkList tabIndex={2} />}
+              {currentView === 'My Artworks' &&
+                <ArtworkList
+                  artworks={artworks}
+                  tabIndex={2} />
+              }
 
             </Group>
 
