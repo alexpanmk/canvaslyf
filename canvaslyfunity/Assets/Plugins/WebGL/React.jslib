@@ -1,5 +1,6 @@
 mergeInto(LibraryManager.library, {
   nearCanvas: function (canvas) {
-    window.dispatchReactUnityEvent("nearCanvas", canvas);
+    var canvasStr = UTF8ToString(canvas);
+    window.dispatchReactUnityEvent("nearCanvas", canvasStr);
   },
 });
