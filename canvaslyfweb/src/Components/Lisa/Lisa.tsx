@@ -52,7 +52,7 @@ const Lisa = (props: any) => {
   return (
     <Stack style={{ height: '100%' }}>
       <Image src="/assets/images/lisa.png" alt="Gallery Placeholder" style={{ width: '100%', height: 250, objectFit: 'cover' }} />
-      <Stack style={{ height: '100%', border: '1px solid #FFF', flex: 1 }}>
+      <Stack style={{ height: '100%', border: '1px solid #FFF', flex: 1, overflow: 'auto' }}>
         <ScrollArea style={{ flex: 1, padding: '10px' }}>
           {messages.map((message, index) => (
             <Group key={index} align={message.role === 'assistant' ? 'flex-end' : 'flex-start'} style={{ marginBottom: '10px' }}>

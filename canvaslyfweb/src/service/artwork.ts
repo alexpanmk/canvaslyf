@@ -3,10 +3,11 @@ import {
   addDoc,
   getDoc,
   getDocs,
+  setDoc,
   doc,
   Firestore,
 } from "firebase/firestore";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, onSnapshot } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { isNull } from "../functions/functions";
@@ -27,11 +28,20 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-//Get all artworks
-export const getAllArtworks = async () => {
+//Get all artworks with real-time updates
+export const getAllArtworks = (callback: (artworks: any[]) => void) => {
   try {
-    const querySnapshot = await getDocs(collection(db, "artworks"));
-    return querySnapshot.docs.map((doc) => doc.data());
+    const unsubscribe = onSnapshot(
+      collection(db, "artworks"),
+      (querySnapshot) => {
+        const artworks = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        callback(artworks);
+      }
+    );
+    return unsubscribe; // Return the unsubscribe function to stop listening for updates
   } catch (e) {
     console.error("Error getting artworks: ", e);
   }
@@ -96,5 +106,15 @@ export const getArtwork = async (id: string) => {
     }
   } catch (e) {
     console.error("Error getting artwork: ", e);
+  }
+};
+
+//Update artwork
+export const updateArtwork = async (id: string, artwork: any) => {
+  try {
+    const docRef = doc(db, "artworks", id);
+    await setDoc(docRef, artwork);
+  } catch (e) {
+    console.error("Error updating artwork: ", e);
   }
 };
