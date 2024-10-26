@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         LockCursor();
+        look = new Vector2(transform.localRotation.eulerAngles.y, -cameraTransform.localRotation.eulerAngles.x);
     }
 
     void Update()
