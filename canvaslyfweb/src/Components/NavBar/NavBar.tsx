@@ -25,6 +25,7 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 const NavItems = [
   { icon: Home2, label: 'Home' },
   { icon: Files, label: 'My Artworks' },
+  { icon: Files, label: 'lyfDashboard' },
   { icon: Files, label: 'Purchased Artworks' },
   { icon: ReportMoney, label: 'Earnings' }
 ]

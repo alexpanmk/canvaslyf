@@ -13,6 +13,7 @@ import { NavBar } from './Components/NavBar/NavBar';
 import ArtworkList from './Components/ArtworkList/ArtworkList';
 import LoginPage from './Components/LoginPage/LoginPage';
 import Home from './Components/Home/Home';
+import LyfRevenueDashboard from './Components/LyfRevenueDashboard/LyfRevenueDashboard';
 
 import { getAllArtworks } from './service/artwork';
 
@@ -137,11 +138,18 @@ function App() {
                   />
                 </>
               }
+              {/* Artists  */}
               {currentView === 'My Artworks' &&
                 <ArtworkList
                   artworks={artworks}
                   tabIndex={2} />
               }
+              {/* Lyf Admin */}
+              {currentView === 'lyfDashboard' &&
+                <LyfRevenueDashboard />
+              }
+              {/* Purchased Artworks */}
+
 
             </Group>
 
