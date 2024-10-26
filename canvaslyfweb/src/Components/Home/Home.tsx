@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Stack, Group, Badge, Image, TextInput, ActionIcon } from '@mantine/core'
+import { isNull } from '../../functions/functions'
 
 import PurchaseFlow from '../PurchaseFlow/PurchaseFlow'
 import InformationPane from './InformationPane'
@@ -10,10 +11,18 @@ import { updateArtwork } from '../../service/artwork'
 const Home = (props: any) => {
 
   const { artworks } = props;
+
+  const [artworkInFocus, setArtworkInFocus] = useState(null);
   const [currentView, setCurrentView] = useState('Information');
   const [buyArtwork, setBuyArtwork] = useState('');
-  console.log(artworks);
 
+  console.log(artworkInFocus)
+
+  useEffect(() => {
+    if (props.artworkInFocus) {
+      setArtworkInFocus(props.artworkInFocus)
+    }
+  }, [props.artworkInFocus])
 
   // console.log(artworks);
 
@@ -43,10 +52,10 @@ const Home = (props: any) => {
 
       <Stack style={{ width: 500, gap: 20, height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.6)', padding: 40, borderRadius: 20, backdropFilter: 'blur(10px)' }}>
 
-        <InformationPane
-          artwork={artworks[0]}
+        {artworkInFocus && <InformationPane
+          artwork={artworkInFocus}
           onBuy={(id: string) => setBuyArtwork(id)}
-        />
+        />}
         {currentView === 'Lisa' && <Lisa />}
 
       </Stack>

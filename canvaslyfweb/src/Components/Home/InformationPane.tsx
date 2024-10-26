@@ -6,8 +6,10 @@ import { isNull } from '../../functions/functions';
 
 const InformationPane = (props: any) => {
 
-  const artwork = props.artwork;
+  const artwork = isNull(props.artwork) ? {} : props.artwork;
   console.log(artwork.id);
+
+  if (isNull(artwork.id)) return <></>;
 
   const sold = isNull(artwork.status) ? false : artwork.status;
 

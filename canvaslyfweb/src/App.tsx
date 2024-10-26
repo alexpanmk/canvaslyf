@@ -40,6 +40,10 @@ function App() {
 
   const [user, setUser] = useState<User | null>(null);
   const [artworks, setArtworks] = useState<any[]>([]);
+
+  const [canvasInFocus, setCanvasInFocus] = useState(null);
+  const [artworkInFocus, setArtworkInFocus] = useState(null);
+
   const [currentView, setCurrentView] = useState('Home');
 
   // const inputRef = useRef(null);
@@ -54,10 +58,20 @@ function App() {
     codeUrl: "/assets/canvasunity/Build/canvasunity.wasm",
   });
 
-  const handleCoord = useCallback((value: any) => {
-    console.log(value)
+  const handleNearCanvas = useCallback((canvas: any) => {
+    console.log(canvas)
+    if (canvasInFocus !== canvas) {
+      setCanvasInFocus(canvas);
+    }
   }, []);
 
+  useEffect(() => {
+
+    setArtworkInFocus(artworks.find((artwork: any) => artwork.canvasID === canvasInFocus))
+
+  }, [canvasInFocus, artworks])
+
+  //For controls
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Tab') {
@@ -72,13 +86,15 @@ function App() {
     };
   }, [requestPointerLock]);
 
+  //For canvas proximity trigger
   useEffect(() => {
-    addEventListener("Coord", handleCoord);
+    addEventListener("nearCanvas", handleNearCanvas);
     return () => {
-      removeEventListener("Coord", handleCoord);
+      removeEventListener("nearCanvas", handleNearCanvas);
     };
-  }, [addEventListener, removeEventListener, handleCoord]);
+  }, [addEventListener, removeEventListener, handleNearCanvas]);
 
+  //Get all artworks
   useEffect(() => {
     const unSubscribe = getAllArtworks((artworks: any[]) => {
       setArtworks(artworks)
@@ -116,6 +132,7 @@ function App() {
               {currentView === 'Home' &&
                 <>
                   <Home
+                    artworkInFocus={artworkInFocus}
                     artworks={artworks}
                   />
                 </>
