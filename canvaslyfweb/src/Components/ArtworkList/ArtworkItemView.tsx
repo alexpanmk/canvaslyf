@@ -12,7 +12,7 @@ interface ArtworkItemViewProps {
 
 const ArtworkItemView: React.FC<ArtworkItemViewProps> = ({ imageUrl, title, artist, year, description, onBack }) => {
   return (
-    <Card shadow="sm" padding="lg">
+    <Card flex={1} shadow="sm" padding="lg">
 
 
       <Card.Section>
