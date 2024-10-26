@@ -77,10 +77,11 @@ const ArtworkList = (props: any) => {
             ))}
           </SimpleGrid>
         )}
+        {currentView === 'detail' && selectedArtwork && (
+          <ArtworkItemView artwork={selectedArtwork} onBack={handleBackToList} />
+        )}
       </Stack>
-      {currentView === 'detail' && selectedArtwork && (
-        <ArtworkItemView artwork={selectedArtwork} onBack={handleBackToList} />
-      )}
+
 
       <Modal
         size={'50%'}
