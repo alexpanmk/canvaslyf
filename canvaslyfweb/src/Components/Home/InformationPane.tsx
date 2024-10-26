@@ -1,7 +1,8 @@
 import React from 'react'
 import { Badge, Button, Tabs, Title, Stack, Group, Image, TextInput, ActionIcon, ScrollArea, Text } from '@mantine/core';
-
+import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
 import { isNull } from '../../functions/functions';
+
 
 
 const InformationPane = (props: any) => {
@@ -27,8 +28,13 @@ const InformationPane = (props: any) => {
             <Title order={4} style={{ color: '#FFF' }}>
               {artwork && artwork.price && `$${artwork.price.toLocaleString()}`}
             </Title>
-            {!sold && <Button onClick={() => props.onBuy(artwork.id)} color="green">Buy</Button>}
-            {sold && <Badge color="red" style={{ color: '#FFF' }}>Sold</Badge>}
+            <Group style={{ gap: 10 }}>
+              <ActionIcon color="red" radius="xl">
+                {props.liked ? <IconHeartFilled color="red" /> : <IconHeart />}
+              </ActionIcon>
+              {!sold && <Button onClick={() => props.onBuy(artwork.id)} color="green">Buy</Button>}
+              {sold && <Badge color="red" style={{ color: '#FFF' }}>Sold</Badge>}
+            </Group>
           </Group>
 
           <Text style={{ color: '#FFF' }}>{artwork && artwork.description}</Text>
