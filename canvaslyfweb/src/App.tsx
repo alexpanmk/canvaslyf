@@ -44,7 +44,7 @@ function App() {
 
   const [canvasInFocus, setCanvasInFocus] = useState(null);
   const [artworkInFocus, setArtworkInFocus] = useState(null);
-
+  const [centerPieceInFocus, setCenterPieceInFocus] = useState(false);
   const [currentView, setCurrentView] = useState('Home');
 
   // const inputRef = useRef(null);
@@ -69,9 +69,10 @@ function App() {
   useEffect(() => {
 
     setArtworkInFocus(artworks.find((artwork: any) => artwork.canvasID === canvasInFocus))
+    setCenterPieceInFocus(canvasInFocus === 'Centerpiece')
 
   }, [canvasInFocus, artworks])
-
+  // console.log(artworkInFocus)
   //For controls
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -102,7 +103,7 @@ function App() {
     })
 
     return () => {
-      unSubscribe
+      unSubscribe()
     }
 
   }, [])
@@ -133,6 +134,7 @@ function App() {
               {currentView === 'Home' &&
                 <>
                   <Home
+                    centerPieceInFocus={centerPieceInFocus}
                     artworkInFocus={artworkInFocus}
                     artworks={artworks}
                   />
