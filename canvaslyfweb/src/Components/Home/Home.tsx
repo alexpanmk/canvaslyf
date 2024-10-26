@@ -34,7 +34,6 @@ const Home = (props: any) => {
         <PurchaseFlow
           artwork={artworks[buyArtwork]}
           onSuccess={() => {
-            console.log('Success')
             const newArtwork = artworks.find((artwork: any) => artwork.id === buyArtwork)
 
             updateArtwork(buyArtwork, {
@@ -57,12 +56,12 @@ const Home = (props: any) => {
             artwork={artworkInFocus}
             onBuy={(id: string) => setBuyArtwork(id)}
           />}
-          {currentView === 'Lisa' && <Lisa />}
+          {currentView === 'Ask Lisa' && <Lisa />}
         </Stack> : <Stack style={{ flex: 1 }} />}
 
 
 
-        <SegmentedControl style={{ width: '100%' }} data={['Information', 'Lisa', 'Hide']} value={currentView} onChange={(value) => setCurrentView(value)} />
+        <SegmentedControl style={{ width: '100%' }} data={['Information', 'Ask Lisa', 'Hide']} value={currentView} onChange={(value) => setCurrentView(value)} />
 
 
       </Stack>
