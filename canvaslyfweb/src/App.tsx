@@ -123,7 +123,10 @@ function App() {
           <Group>
             {/* Left Nav */}
             <Stack style={{ padding: 20, height: '100vh', width: 80 }}>
-              <NavBar onChange={(page) => setCurrentView(page)} />
+              <NavBar
+                user={user}
+                onChange={(page) => setCurrentView(page)}
+              />
               {/* <Stack style={{ padding: 20, height: '100vh', width: 100, backgroundColor: 'rgba(0, 0, 0, 0.7)', borderRadius: 40 }}>
 
               </Stack> */}
@@ -134,6 +137,7 @@ function App() {
               {currentView === 'Home' &&
                 <>
                   <Home
+                    user={user}
                     centerPieceInFocus={centerPieceInFocus}
                     artworkInFocus={artworkInFocus}
                     artworks={artworks}
@@ -158,8 +162,8 @@ function App() {
           </Group>}
 
         {!user && <LoginPage
-          onLogin={(email, password) => {
-            setUser({ email, password })
+          onLogin={(email, password, role) => {
+            setUser({ email, password, role })
             console.log(user)
           }}
         />}

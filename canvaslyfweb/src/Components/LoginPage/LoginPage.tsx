@@ -5,10 +5,11 @@ import { SegmentedControl, TextInput, PasswordInput, Paper, Title, Container, Bu
 const LoginPage = (props: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('Visitor');
 
   const handleLogin = () => {
     // Handle login logic here
-    props.onLogin(email, password);
+    props.onLogin(email, password, role);
   };
 
   const handleSegmentChange = (value) => {
@@ -17,14 +18,17 @@ const LoginPage = (props: Props) => {
       case 'Visitor':
         setEmail('lyfresident@gmail.com');
         setPassword('123456789');
+        setRole('visitor');
         break;
       case 'Artist':
         setEmail('jahanloh@gmail.com');
         setPassword('pHYTOyV1GGi1XZZSKqby');
+        setRole('artist');
         break;
       case 'lyf Admin':
         setEmail('admin@lyf.com.sg');
         setPassword('123456789');
+        setRole('lyfAdmin');
 
     }
   }

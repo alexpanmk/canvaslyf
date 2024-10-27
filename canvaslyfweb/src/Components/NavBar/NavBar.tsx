@@ -4,6 +4,8 @@ import { Center, Tooltip, UnstyledButton, Stack, rem } from '@mantine/core';
 import { Home2, Files, Logout, ReportMoney } from 'tabler-icons-react';
 import classes from './NavBar.module.css';
 
+import { isNull } from "../../functions/functions";
+
 interface NavbarLinkProps {
   icon: typeof IconHome2;
   label: string;
@@ -23,27 +25,36 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 }
 
 const NavItems = [
-  { icon: Home2, label: 'Home' },
-  { icon: Files, label: 'My Artworks' },
-  { icon: Files, label: 'lyfDashboard' },
-  { icon: Files, label: 'Purchased Artworks' },
-  { icon: ReportMoney, label: 'Earnings' }
+  { icon: Home2, label: 'Home', visibility: 'all' },
+  { icon: Files, label: 'My Artworks', visibility: 'artist' },
+  { icon: Files, label: 'Exhibitions', visibility: 'lyfAdmin' },
+  { icon: Files, label: 'lyfDashboard', visibility: 'lyfAdmin' },
+  // { icon: Files, label: 'Purchased Artworks' },
+  // { icon: ReportMoney, label: 'Earnings' }
 ]
 
 export function NavBar(props: any) {
   const [active, setActive] = useState(0);
+  const { currentView } = props;
 
-  const links = NavItems.map((item, index) => (
-    <NavbarLink
-      {...item}
-      key={item.label}
-      active={index === active}
-      onClick={() => {
-        props.onChange(item.label)
-        setActive(index)
-      }}
-    />
-  ));
+  const user = isNull(props.user) ? { role: 'all' } : props.user;
+
+  const links = NavItems.map((item, index) => {
+    if (item.visibility === 'all' || user.role === item.visibility) {
+      return (
+        <NavbarLink
+          {...item}
+          key={item.label}
+          active={currentView === item.label}
+          onClick={() => {
+            props.onChange(item.label);
+            setActive(index);
+          }}
+        />
+      );
+    }
+    return null;
+  });
 
   return (
     <nav className={classes.navbar}>
