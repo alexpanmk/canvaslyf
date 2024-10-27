@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { TextInput, PasswordInput, Paper, Title, Container, Button, Group, Image } from '@mantine/core';
+import { SegmentedControl, TextInput, PasswordInput, Paper, Title, Container, Button, Group, Image } from '@mantine/core';
 
 const LoginPage = (props: Props) => {
   const [email, setEmail] = useState('');
@@ -10,6 +10,24 @@ const LoginPage = (props: Props) => {
     // Handle login logic here
     props.onLogin(email, password);
   };
+
+  const handleSegmentChange = (value) => {
+    // Handle segment change logic here
+    switch (value) {
+      case 'Visitor':
+        setEmail('lyfresident@gmail.com');
+        setPassword('123456789');
+        break;
+      case 'Artist':
+        setEmail('jahanloh@gmail.com');
+        setPassword('1234789');
+        break;
+      case 'lyf Admin':
+        setEmail('admin@lyf.com.sg');
+        setPassword('123456789');
+
+    }
+  }
 
   return (
     <Group style={{ gap: 0, display: 'flex', height: '100vh', width: '100vw' }}>
@@ -31,11 +49,15 @@ const LoginPage = (props: Props) => {
         <PasswordInput
           label="Password"
           placeholder="Your password"
-          value={password}
+          value={'123456789'}
           onChange={(event) => setPassword(event.currentTarget.value)}
           required
           mt="md"
         />
+        {/* Login shortcuts for judges */}
+        <SegmentedControl
+          onChange={handleSegmentChange}
+          w={'100%'} mt={20} data={['Visitor', 'Artist', 'lyf Admin']} />
         <Group mt="md">
           <Button onClick={handleLogin}>Login</Button>
         </Group>
