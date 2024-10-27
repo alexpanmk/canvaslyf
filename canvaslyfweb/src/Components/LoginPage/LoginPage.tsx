@@ -20,7 +20,7 @@ const LoginPage = (props: Props) => {
         break;
       case 'Artist':
         setEmail('jahanloh@gmail.com');
-        setPassword('1234789');
+        setPassword('pHYTOyV1GGi1XZZSKqby');
         break;
       case 'lyf Admin':
         setEmail('admin@lyf.com.sg');
