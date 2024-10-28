@@ -18,7 +18,7 @@ const AddArtwork: React.FC = () => {
     description: '',
     imageUrl: '',
     price: '',
-    agreement: false,
+    agreement: true,
   });
   const [artworkFile, setArtworkFile] = useState<File | null>(null);
 

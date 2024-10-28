@@ -14,6 +14,7 @@ import ArtworkList from './Components/ArtworkList/ArtworkList';
 import LoginPage from './Components/LoginPage/LoginPage';
 import Home from './Components/Home/Home';
 import LyfRevenueDashboard from './Components/LyfRevenueDashboard/LyfRevenueDashboard';
+import ExhibitionList from './Components/ExhibitionList/ExhibitionList';
 
 import { getAllArtworks } from './service/artwork';
 
@@ -44,7 +45,7 @@ function App() {
 
   const [canvasInFocus, setCanvasInFocus] = useState(null);
   const [artworkInFocus, setArtworkInFocus] = useState(null);
-  const [centerPieceInFocus, setCenterPieceInFocus] = useState(false);
+  const [centerPieceInFocus, setCenterPieceInFocus] = useState(true);
   const [currentView, setCurrentView] = useState('Home');
 
   // const inputRef = useRef(null);
@@ -109,7 +110,7 @@ function App() {
   }, [])
 
 
-  console.log(artworks)
+
 
   return (
     <>
@@ -126,6 +127,7 @@ function App() {
               <NavBar
                 user={user}
                 onChange={(page) => setCurrentView(page)}
+                logOut={() => setUser(null)}
               />
               {/* <Stack style={{ padding: 20, height: '100vh', width: 100, backgroundColor: 'rgba(0, 0, 0, 0.7)', borderRadius: 40 }}>
 
@@ -147,10 +149,17 @@ function App() {
               {/* Artists  */}
               {currentView === 'My Artworks' &&
                 <ArtworkList
+                  user={user}
                   artworks={artworks}
                   tabIndex={2} />
               }
               {/* Lyf Admin */}
+              {currentView === 'Exhibitions' &&
+                <ExhibitionList />
+              }
+
+
+
               {currentView === 'lyfDashboard' &&
                 <LyfRevenueDashboard />
               }
@@ -183,7 +192,7 @@ function App() {
             height: '100vh', position: 'relative', overflow: 'hidden'
           }}>
 
-          <Unity unityProvider={unityProvider} style={{ width: '100%', height: '100%' }} tabIndex={1} />
+          {user && <Unity unityProvider={unityProvider} style={{ width: '100%', height: '100%' }} tabIndex={1} />}
 
 
 
