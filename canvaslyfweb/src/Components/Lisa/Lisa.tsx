@@ -35,7 +35,8 @@ const LisaPersona = {
 const Lisa = () => {
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: 'http://localhost:3000/api/chat',
+    // api: 'http://localhost:3000/api/chat',
+    api: 'https://canvaslyf.onrender.com/api/chat',
     body: {
       persona: LisaPersona,
     },
