@@ -1,7 +1,19 @@
-import { collection, addDoc, getDoc, getDocs, doc } from "firebase/firestore"; 
+import { collection, addDoc, getDoc, getDocs, doc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
 
+//Firebase Config
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+};
 
-const db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 // Add a new artist
 export const addArtist = async (artist: any) => {
@@ -32,7 +44,7 @@ export const getArtist = async (id: string) => {
 export const getAllArtists = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, "artists"));
-    return querySnapshot.docs.map(doc => doc.data());
+    return querySnapshot.docs.map((doc) => doc.data());
   } catch (e) {
     console.error("Error getting artists: ", e);
   }
@@ -85,7 +97,7 @@ export const getArtwork = async (id: string) => {
 export const getAllArtworks = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, "artworks"));
-    return querySnapshot.docs.map(doc => doc.data());
+    return querySnapshot.docs.map((doc) => doc.data());
   } catch (e) {
     console.error("Error getting artworks: ", e);
   }
@@ -138,7 +150,7 @@ export const getUser = async (id: string) => {
 export const getAllUsers = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, "users"));
-    return querySnapshot.docs.map(doc => doc.data());
+    return querySnapshot.docs.map((doc) => doc.data());
   } catch (e) {
     console.error("Error getting users: ", e);
   }
