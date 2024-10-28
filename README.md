@@ -1,6 +1,6 @@
 # Canvas by Lyf
 
-![Lyf Logo](/assets/images/screenshot.png)
+<img src="https://i.imgur.com/DWJFrDI.png">
 
 [Canvas Lyf Web Demo](https://canvaslyfweb.onrender.com/)
 
