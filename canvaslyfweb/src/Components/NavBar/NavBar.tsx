@@ -63,7 +63,7 @@ export function NavBar(props: any) {
           <Stack style={{ flex: 1 }}>
             {links}
           </Stack>
-          <NavbarLink icon={Logout} label="Logout" />
+          <NavbarLink onClick={() => props.logOut()} icon={Logout} label="Logout" />
         </Stack>
 
       </Center>
