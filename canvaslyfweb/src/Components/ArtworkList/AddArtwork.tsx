@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Stack, Checkbox, rem, Text, Container, Stepper, Button, Group, TextInput, Textarea } from '@mantine/core';
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react';
 
-import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from '@mantine/dropzone';
+import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { useDisclosure } from '@mantine/hooks';
 
 import { addArtwork } from '../../service/artwork';
@@ -37,9 +37,8 @@ const AddArtwork: React.FC = () => {
   //Validation
   const handleSubmit = async () => {
     try {
-      const artworkId = await addArtwork(artworkDetails, artworkFile).then((id) => {
-        console.log(artworkId)
-      })
+      const artworkId = await addArtwork(artworkDetails, artworkFile);
+      console.log(artworkId);
     } catch (e) {
       console.error('Error adding artwork: ', e);
     }

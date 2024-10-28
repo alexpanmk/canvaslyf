@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-const uploadToFirebase = (file, fileName, path) => {
+const uploadToFirebase = (file: any, fileName: any, path: any) => {
   console.log(file, fileName, path);
 
   // const storageRef = storage.ref();

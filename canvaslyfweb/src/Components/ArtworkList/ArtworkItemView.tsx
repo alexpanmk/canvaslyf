@@ -1,21 +1,9 @@
-import React from 'react';
 import { Title, Stack, Card, Image, Text, Badge, Group, Button, SimpleGrid } from '@mantine/core';
 import { isNull } from '../../functions/functions';
 
-interface ArtworkItemViewProps {
-  artwork: any;
-  imageUrl: string;
-  title: string;
-  artist: string;
-  year: string;
-  description: string;
-  onBack: () => void;
-}
 
-const ArtworkItemView = (props: ArtworkItemViewProps) => {
-  const { artwork, imageUrl, title, artist, year, description, onBack } = props;
-
-  console.log(artwork);
+const ArtworkItemView = (props: any) => {
+  const { artwork, title, year, description, onBack } = props;
 
   const status = isNull(artwork.status) ? 'Available' : artwork.status;
 

@@ -3,10 +3,19 @@ import { SimpleGrid, Grid, Badge, Group, Stack, Modal, Text, Title, Card, Image,
 
 import { getAllExhibitions } from '../../service/exhibitions';
 
+interface Exhibition {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  startDate: string;
+  endDate: string;
+}
+
 const ExhibitionList = (props: any) => {
 
-  const [exhibitions, setExhibitions] = useState([]);
-  const [selectedExhibition, setSelectedExhibition] = useState(null);
+  const [exhibitions, setExhibitions] = useState<Exhibition[]>([]);
+  const [selectedExhibition, setSelectedExhibition] = useState<string | null>(null);
 
   useEffect(() => {
     getAllExhibitions().then((exhibitions: any) => {

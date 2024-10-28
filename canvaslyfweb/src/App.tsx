@@ -1,13 +1,12 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { Title, AppShell, Group, Stack, Text, TextInput } from '@mantine/core'
+import { useState, useEffect, useCallback } from 'react'
+import { AppShell, Group, Stack } from '@mantine/core'
 import { Unity, useUnityContext } from "react-unity-webgl";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
 
 // import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
-import SignUpFlow from './Components/SignUpFlow/SignUpFlow';
-import { getFirestore } from "firebase/firestore";
+// import { getFirestore } from "firebase/firestore";
 
 import { NavBar } from './Components/NavBar/NavBar';
 import ArtworkList from './Components/ArtworkList/ArtworkList';
@@ -19,25 +18,25 @@ import ExhibitionList from './Components/ExhibitionList/ExhibitionList';
 import { getAllArtworks } from './service/artwork';
 
 //Firebase Config
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
-};
+// const firebaseConfig = {
+//   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+//   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+//   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+//   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+//   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+//   appId: import.meta.env.VITE_FIREBASE_APP_ID
+// };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
+// const db = getFirestore(app);
 
 function App() {
 
   interface User {
-
     email: string;
     password: string;
+    role: string;
   }
 
   const [user, setUser] = useState<User | null>(null);
@@ -104,7 +103,7 @@ function App() {
     })
 
     return () => {
-      unSubscribe()
+      // unSubscribe
     }
 
   }, [])
@@ -126,7 +125,7 @@ function App() {
             <Stack style={{ padding: 20, height: '100vh', width: 80 }}>
               <NavBar
                 user={user}
-                onChange={(page) => setCurrentView(page)}
+                onChange={(page: any) => setCurrentView(page)}
                 logOut={() => setUser(null)}
               />
               {/* <Stack style={{ padding: 20, height: '100vh', width: 100, backgroundColor: 'rgba(0, 0, 0, 0.7)', borderRadius: 40 }}>
@@ -171,7 +170,7 @@ function App() {
           </Group>}
 
         {!user && <LoginPage
-          onLogin={(email, password, role) => {
+          onLogin={(email: any, password: any, role: any) => {
             setUser({ email, password, role })
             console.log(user)
           }}

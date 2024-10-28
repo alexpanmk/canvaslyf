@@ -51,22 +51,22 @@ export const getAllArtists = async () => {
 };
 
 // Delete an artist by ID
-export const deleteArtist = async (id: string) => {
-  try {
-    await db.collection("artists").doc(id).delete();
-  } catch (e) {
-    console.error("Error deleting artist: ", e);
-  }
-};
+// export const deleteArtist = async (id: string) => {
+//   try {
+//     await db.collection("artists").doc(id).delete();
+//   } catch (e) {
+//     console.error("Error deleting artist: ", e);
+//   }
+// };
 
 // Edit an artist by ID
-export const editArtist = async (id: string, updatedArtist: any) => {
-  try {
-    await db.collection("artists").doc(id).update(updatedArtist);
-  } catch (e) {
-    console.error("Error editing artist: ", e);
-  }
-};
+// export const editArtist = async (id: string, updatedArtist: any) => {
+//   try {
+//     await db.collection("artists").doc(id).update(updatedArtist);
+//   } catch (e) {
+//     console.error("Error editing artist: ", e);
+//   }
+// };
 
 // Add a new artwork
 export const addArtwork = async (artwork: any) => {
@@ -104,22 +104,22 @@ export const getAllArtworks = async () => {
 };
 
 // Delete an artwork by ID
-export const deleteArtwork = async (id: string) => {
-  try {
-    await db.collection("artworks").doc(id).delete();
-  } catch (e) {
-    console.error("Error deleting artwork: ", e);
-  }
-};
+// export const deleteArtwork = async (id: string) => {
+//   try {
+//     await db.collection("artworks").doc(id).delete();
+//   } catch (e) {
+//     console.error("Error deleting artwork: ", e);
+//   }
+// };
 
 // Edit an artwork by ID
-export const editArtwork = async (id: string, updatedArtwork: any) => {
-  try {
-    await db.collection("artworks").doc(id).update(updatedArtwork);
-  } catch (e) {
-    console.error("Error editing artwork: ", e);
-  }
-};
+// export const editArtwork = async (id: string, updatedArtwork: any) => {
+//   try {
+//     await db.collection("artworks").doc(id).update(updatedArtwork);
+//   } catch (e) {
+//     console.error("Error editing artwork: ", e);
+//   }
+// };
 
 // Add a new user
 export const addUser = async (user: any) => {
@@ -157,19 +157,19 @@ export const getAllUsers = async () => {
 };
 
 // Edit a user by ID
-export const editUser = async (id: string, updatedUser: any) => {
-  try {
-    await db.collection("users").doc(id).update(updatedUser);
-  } catch (e) {
-    console.error("Error editing user: ", e);
-  }
-};
+// export const editUser = async (id: string, updatedUser: any) => {
+//   try {
+//     await db.collection("users").doc(id).update(updatedUser);
+//   } catch (e) {
+//     console.error("Error editing user: ", e);
+//   }
+// };
 
 // Delete a user by ID
-export const deleteUser = async (id: string) => {
-  try {
-    await db.collection("users").doc(id).delete();
-  } catch (e) {
-    console.error("Error deleting user: ", e);
-  }
-};
+// export const deleteUser = async (id: string) => {
+//   try {
+//     await db.collection("users").doc(id).delete();
+//   } catch (e) {
+//     console.error("Error deleting user: ", e);
+//   }
+// };

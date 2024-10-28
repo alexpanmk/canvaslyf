@@ -6,6 +6,7 @@ import {
   setDoc,
   doc,
   Firestore,
+  deleteDoc,
 } from "firebase/firestore";
 import { getFirestore, onSnapshot } from "firebase/firestore";
 import { initializeApp } from "firebase/app";

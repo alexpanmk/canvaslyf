@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Stack, Group, Badge, Image, TextInput, ActionIcon, SegmentedControl } from '@mantine/core'
 import { isNull } from '../../functions/functions'
 

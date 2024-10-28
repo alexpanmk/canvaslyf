@@ -2,19 +2,14 @@ import { useState } from "react";
 import { Center, Tooltip, UnstyledButton, Stack, rem } from '@mantine/core';
 
 import { Home2, Files, Logout, ReportMoney } from 'tabler-icons-react';
+
 import classes from './NavBar.module.css';
 
 import { isNull } from "../../functions/functions";
-
-interface NavbarLinkProps {
-  icon: typeof IconHome2;
-  label: string;
-  active?: boolean;
-  onClick?(): void;
-}
+// import { IconHome2 } from "@tabler/icons-react";
 
 
-function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
+function NavbarLink({ icon: Icon, label, active, onClick }: any) {
   return (
     <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
       <UnstyledButton onClick={onClick} className={classes.link} data-active={active || undefined}>
