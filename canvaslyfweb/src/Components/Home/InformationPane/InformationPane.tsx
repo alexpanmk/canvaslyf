@@ -12,10 +12,10 @@ const InformationPane = (props: any) => {
 
   const artwork = isNull(props.artwork) ? null : props.artwork;
   const centerPieceInFocus = isNull(props.centerPieceInFocus) ? {} : props.centerPieceInFocus;
-  console.log(centerPieceInFocus)
 
 
-  console.log(artwork?.id);
+
+
 
   // if (isNull(artwork?.id)) return <></>;
 
@@ -55,9 +55,13 @@ const InformationPane = (props: any) => {
               {artwork && artwork.price && `$${artwork.price.toLocaleString()}`}
             </Title>
             <Group style={{ gap: 10 }}>
-              <ActionIcon color="red" radius="xl">
+              {/* <ActionIcon color="red" radius="xl">
                 {props.liked ? <IconHeartFilled color="red" /> : <IconHeart />}
-              </ActionIcon>
+              </ActionIcon> */}
+              {/* likes badge */}
+              <Badge leftSection={<IconHeart />} color="blue" variant="light">
+                Like
+              </Badge>
               {!sold && <Button onClick={() => props.onBuy(artwork.id)} color="green">Buy</Button>}
               {sold && <Badge color="red" style={{ color: '#FFF' }}>Sold</Badge>}
             </Group>
@@ -84,6 +88,12 @@ const InformationPane = (props: any) => {
             <Tabs.Panel value="description">
               <Stack mt={20} style={{ gap: 20 }}>
                 <Text style={{ color: '#FFF' }}>{artwork && artwork.description}</Text>
+              </Stack>
+            </Tabs.Panel>
+
+            <Tabs.Panel value="artistInfo">
+              <Stack mt={20} style={{ gap: 20 }}>
+                <Text style={{ color: '#FFF' }}>{artwork && artwork.artistInfo}</Text>
               </Stack>
             </Tabs.Panel>
 

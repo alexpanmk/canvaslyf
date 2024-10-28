@@ -3,7 +3,7 @@ import { Stack, Group, Badge, Image, TextInput, ActionIcon, SegmentedControl } f
 import { isNull } from '../../functions/functions'
 
 import PurchaseFlow from '../PurchaseFlow/PurchaseFlow'
-import InformationPane from './InformationPane'
+import InformationPane from './InformationPane/InformationPane'
 import Lisa from '../Lisa/Lisa'
 
 import { updateArtwork } from '../../service/artwork'

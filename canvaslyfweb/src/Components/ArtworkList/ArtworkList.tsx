@@ -33,7 +33,11 @@ const ArtworkList = (props: any) => {
   const [currentView, setCurrentView] = useState('list');
   const [selectedArtwork, setSelectedArtwork] = useState(null);
 
+  // const [artistID, setArtistID] = useState(null);
+
   const artworks = isNull(props.artworks) ? sampleArtworks : props.artworks;
+  const user = isNull(props.user) ? {} : props.user;
+  // if (!isNull(user.password)) setArtistID(user.password);
 
 
   const handleViewDetails = (artwork: any) => {
