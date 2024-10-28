@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { SimpleGrid, Badge, Group, Stack, Modal, Text, Title, Card, Image, Button } from '@mantine/core';
+
+import { SimpleGrid, Badge, Group, Stack, Text, Title, Card, } from '@mantine/core';
 import { AreaChart, PieChart } from '@mantine/charts';
 
 const data = [
@@ -54,7 +54,7 @@ const pieData = [
   }
 ]
 
-const LyfRevenueDashboard = (props: any) => {
+const LyfRevenueDashboard = () => {
   return (
     <Stack style={{ height: '100%', flex: 1, backgroundColor: 'rgba(255, 255, 255, 0.6)', padding: 40, borderRadius: 20, backdropFilter: 'blur(10px)' }}>
       <Group justify='space-between'>
@@ -104,7 +104,7 @@ const LyfRevenueDashboard = (props: any) => {
           <Group style={{ marginBottom: 5, marginTop: 10 }}>
             <Title size='50'>$59,600</Title>
           </Group>
-          <Group position="apart" style={{ marginBottom: 5, marginTop: 10 }}>
+          <Group style={{ marginBottom: 5, marginTop: 10 }}>
             <Title order={3}>Year-to-Date Operating Income</Title>
             {/* <Badge color="green" variant="light">
               Updated
@@ -118,7 +118,7 @@ const LyfRevenueDashboard = (props: any) => {
 
       <SimpleGrid cols={2} spacing="lg" style={{ flex: 1 }}>
         <Card shadow="sm" padding="lg">
-          <Group position="apart" style={{ marginBottom: 5, marginTop: 10 }}>
+          <Group style={{ marginBottom: 5, marginTop: 10 }}>
             <Title order={3}>Visitor Traffic (Unique)</Title>
             {/* <Badge color="green" variant="light">
               Updated
@@ -156,7 +156,7 @@ const LyfRevenueDashboard = (props: any) => {
 
         <Card shadow="sm" padding="lg">
 
-          <Group position="apart" style={{ marginBottom: 5, marginTop: 10 }}>
+          <Group style={{ marginBottom: 5, marginTop: 10 }}>
             <Title order={3}>Revenue Breakdown</Title>
             <Badge color="green" variant="light">
               Updated

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Stack, Title, Group, TextInput, ActionIcon, Button, Select, Grid } from '@mantine/core'
+import { Stack, Title, Group, TextInput, Button, Select, Grid } from '@mantine/core'
 
 const mockData = {
   email: 'lyfresident@gmail.com',
@@ -72,7 +72,7 @@ const PurchaseFlow = (props: any) => {
               placeholder="State"
               name="state"
               value={formData.state}
-              onChange={(value) => setFormData({ ...formData, state: value })}
+              onChange={(value) => setFormData({ ...formData, state: value ?? '' })}
               data={['State 1', 'State 2', 'State 3']}
             />
           </Grid.Col>
@@ -115,7 +115,7 @@ const PurchaseFlow = (props: any) => {
         </Grid>
       </Stack>
 
-      <Group position="right">
+      <Group>
         <Button color="blue" variant="light" onClick={() => props.onSuccess()}>Buy</Button>
         <Button color="blue" variant="light" onClick={() => props.onDismiss()}>Cancel</Button>
       </Group>

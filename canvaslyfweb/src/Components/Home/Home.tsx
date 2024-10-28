@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Stack, Group, Badge, Image, TextInput, ActionIcon, SegmentedControl } from '@mantine/core'
-import { isNull } from '../../functions/functions'
+import { Stack, Group, SegmentedControl } from '@mantine/core'
+
 
 import PurchaseFlow from '../PurchaseFlow/PurchaseFlow'
 import InformationPane from './InformationPane/InformationPane'

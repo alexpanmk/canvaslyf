@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Badge, Button, Tabs, Title, Stack, Group, Image, TextInput, ActionIcon, ScrollArea, Text } from '@mantine/core';
-import { IconHeart, IconHeartFilled, IconPencil, IconMessage } from '@tabler/icons-react';
+// import React, { useState } from 'react'
+import { Badge, Button, Tabs, Title, Stack, Group, Image, ScrollArea, Text } from '@mantine/core';
+import { IconHeart, IconPencil, IconMessage } from '@tabler/icons-react';
 import { isNull } from '../../../functions/functions';
 
 import Comments from './Comments';

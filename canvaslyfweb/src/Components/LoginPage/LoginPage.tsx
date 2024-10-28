@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
-import { SegmentedControl, TextInput, PasswordInput, Paper, Title, Container, Button, Group, Image } from '@mantine/core';
+import { SegmentedControl, TextInput, PasswordInput, Paper, Title, Button, Group, } from '@mantine/core';
 
-const LoginPage = (props: Props) => {
+const LoginPage = (props: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('Visitor');
@@ -12,7 +12,7 @@ const LoginPage = (props: Props) => {
     props.onLogin(email, password, role);
   };
 
-  const handleSegmentChange = (value) => {
+  const handleSegmentChange = (value: any) => {
     // Handle segment change logic here
     switch (value) {
       case 'Visitor':

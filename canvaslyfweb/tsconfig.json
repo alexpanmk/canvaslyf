@@ -8,6 +8,8 @@
     "skipLibCheck": true,
     "noEmitOnError": false,
     "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     // other options...
   }
 }

@@ -1,18 +1,8 @@
-import {
-  collection,
-  addDoc,
-  getDoc,
-  getDocs,
-  setDoc,
-  doc,
-  Firestore,
-} from "firebase/firestore";
+import { collection, addDoc, getDoc, setDoc, doc } from "firebase/firestore";
 import { getFirestore, onSnapshot } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { isNull } from "../functions/functions";
-
-import uploadToFirebase from "./common";
 
 //Firebase Config
 const firebaseConfig = {
@@ -63,13 +53,9 @@ export const addArtwork = (artwork: any, file: any) => {
   console.log(fileRef);
   const fileData = isNull(file) ? null : file;
 
-  const artworkDocPromise = new Promise((resolve) =>
-    resolve({ file: fileData })
-  );
-
   let fileLink = "";
 
-  uploadBytes(fileRef, fileData).then((snapshot) => {
+  uploadBytes(fileRef, fileData).then(() => {
     console.log("Uploaded a blob or file!");
     getDownloadURL(fileRef).then((url) => {
       console.log("File available at: ", url);

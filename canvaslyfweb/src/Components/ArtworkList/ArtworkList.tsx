@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { SimpleGrid, Badge, Group, Stack, Modal, Text, Title, Card, Image, Button } from '@mantine/core';
 
 import AddArtwork from './AddArtwork';
@@ -36,7 +36,7 @@ const ArtworkList = (props: any) => {
   // const [artistID, setArtistID] = useState(null);
 
   const artworks = isNull(props.artworks) ? sampleArtworks : props.artworks;
-  const user = isNull(props.user) ? {} : props.user;
+  // const user = isNull(props.user) ? {} : props.user;
   // if (!isNull(user.password)) setArtistID(user.password);
 
 

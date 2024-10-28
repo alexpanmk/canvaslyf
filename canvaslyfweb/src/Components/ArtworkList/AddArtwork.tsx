@@ -3,7 +3,7 @@ import { Stack, Checkbox, rem, Text, Container, Stepper, Button, Group, TextInpu
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react';
 
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
-import { useDisclosure } from '@mantine/hooks';
+// import { useDisclosure } from '@mantine/hooks';
 
 import { addArtwork } from '../../service/artwork';
 
@@ -84,7 +84,7 @@ const AddArtwork: React.FC = () => {
             onDrop={(files) => {
               const file = files[0];
               const reader = new FileReader();
-              reader.onload = (event) => {
+              reader.onload = () => {
                 setArtworkFile(file);
               };
               reader.readAsDataURL(file);

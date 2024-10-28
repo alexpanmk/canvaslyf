@@ -98,7 +98,7 @@ function App() {
 
   //Get all artworks
   useEffect(() => {
-    const unSubscribe = getAllArtworks((artworks: any[]) => {
+    getAllArtworks((artworks: any[]) => {
       setArtworks(artworks)
     })
 

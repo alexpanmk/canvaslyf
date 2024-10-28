@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import { Stack, Group, Image, TextInput, ActionIcon, ScrollArea, Text } from '@mantine/core';
 import { useChat } from 'ai/react';
 import { Send } from 'tabler-icons-react';
 
-type Message = {
-  sender: 'user' | 'bot';
-  text: string;
-};
+// type Message = {
+//   sender: 'user' | 'bot';
+//   text: string;
+// };
 
 
 const LisaPersona = {
@@ -32,7 +32,7 @@ const LisaPersona = {
   ]
 }
 
-const Lisa = (props: any) => {
+const Lisa = () => {
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: 'http://localhost:3000/api/chat',

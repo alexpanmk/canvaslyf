@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { Stack, Image, Text, Title } from '@mantine/core'
 
 const exampleArtwork = {
@@ -8,7 +8,7 @@ const exampleArtwork = {
   description: 'A famous painting by Vincent van Gogh.'
 };
 
-const ArtInformation = (props: any) => {
+const ArtInformation = () => {
 
   const artwork = exampleArtwork;
 
@@ -19,7 +19,7 @@ const ArtInformation = (props: any) => {
 
       return (
       <>
-        <Image src={artwork.imageUrl} alt={art.title} />
+        <Image src={artwork.imageUrl} alt={artwork.title} />
         <Title order={2}>{artwork.title}</Title>
         <Text>{artwork.artist}</Text>
         <Text>{artwork.description}</Text>

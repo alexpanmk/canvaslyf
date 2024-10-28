@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Center, Tooltip, UnstyledButton, Stack, rem } from '@mantine/core';
+// import { useState } from "react";
+import { Center, Tooltip, UnstyledButton, Stack } from '@mantine/core';
 
-import { Home2, Files, Logout, ReportMoney } from 'tabler-icons-react';
+import { Home2, Files, Logout } from 'tabler-icons-react';
 
 import classes from './NavBar.module.css';
 
@@ -29,7 +29,7 @@ const NavItems = [
 ]
 
 export function NavBar(props: any) {
-  const [active, setActive] = useState(0);
+  // const [active, setActive] = useState(0);
   const { currentView } = props;
 
   const user = isNull(props.user) ? { role: 'all' } : props.user;
@@ -39,11 +39,11 @@ export function NavBar(props: any) {
       return (
         <NavbarLink
           {...item}
-          key={item.label}
+          key={index}
           active={currentView === item.label}
           onClick={() => {
             props.onChange(item.label);
-            setActive(index);
+            // setActive(index);
           }}
         />
       );

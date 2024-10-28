@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { SimpleGrid, Grid, Badge, Group, Stack, Modal, Text, Title, Card, Image, Button } from '@mantine/core';
+import { useEffect, useState, useMemo } from 'react';
+import { Grid, Badge, Group, Stack, Text, Title, Card, Image, Button } from '@mantine/core';
 
 import { getAllExhibitions } from '../../service/exhibitions';
 
@@ -12,7 +12,7 @@ interface Exhibition {
   endDate: string;
 }
 
-const ExhibitionList = (props: any) => {
+const ExhibitionList = () => {
 
   const [exhibitions, setExhibitions] = useState<Exhibition[]>([]);
   const [selectedExhibition, setSelectedExhibition] = useState<string | null>(null);
@@ -43,7 +43,7 @@ const ExhibitionList = (props: any) => {
           <Stack style={{ height: '100%', backgroundColor: 'rgba(255, 255, 255, 0.6)', padding: 40, borderRadius: 20, backdropFilter: 'blur(10px)' }}>
             <Stack style={{ height: '100%', overflow: 'auto', gap: 20 }}>
               {sortedExhibitions.map((exhibition: any) => (
-                <Card onClick={(evt) => {
+                <Card onClick={() => {
                   setSelectedExhibition(exhibition.id)
                 }
                 } key={exhibition.id} shadow="sm" padding="lg" style={{ cursor: 'pointer' }}>

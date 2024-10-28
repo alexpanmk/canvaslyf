@@ -5,15 +5,14 @@ import {
   getDocs,
   setDoc,
   doc,
-  Firestore,
   deleteDoc,
 } from "firebase/firestore";
-import { getFirestore, onSnapshot } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
-import { isNull } from "../functions/functions";
+// import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
+// import { isNull } from "../functions/functions";
 
-import uploadToFirebase from "./common";
+// import uploadToFirebase from "./common";
 
 //Firebase Config
 const firebaseConfig = {
@@ -27,7 +26,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const storage = getStorage(app);
+// const storage = getStorage(app);
 
 const exhibitionsCollection = collection(db, "exhibitions");
 
